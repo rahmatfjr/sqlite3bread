@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>list</title>
+
+    <style>
+        #customers {
+            font-family: Arial, Helvetica, sans-serif;
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        #customers td,
+        #customers th {
+            border: 1px solid #ddd;
+            padding: 8px;
+        }
+
+        #customers tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+
+        #customers tr:hover {
+            background-color: #ddd;
+        }
+
+        #customers th {
+            padding-top: 12px;
+            padding-bottom: 12px;
+            text-align: left;
+            background-color: #423d3d;
+            color: white;
+        }
+
+        .atas {
+            color: rgb(0, 0, 0);
+            font-size: 18px;
+            float: left;
+            padding-left: 10px;
+            padding-right: 10px;
+            border: 1px solid rgb(77, 77, 77);
+            border-radius: 9px;
+            background: rgb(218, 213, 213);
+        }
+
+        .a {
+            color: rgb(0, 0, 0);
+            font-size: 14px;
+            float: middle;
+            padding-left: 10px;
+            padding-right: 10px;
+            padding-top: 2px;
+            padding-bottom: 2px;
+            border: 1px solid rgb(0, 0, 0);
+            border-radius: 9px;
+            background: rgb(1, 206, 35);
+        }
+
+        .button {
+            color: rgb(0, 0, 0);
+            font-size: 14px;
+            float: middle;
+            padding-left: 10px;
+            padding-right: 10px;
+            border: 1px solid rgb(0, 0, 0);
+            border-radius: 9px;
+            background: rgb(206, 1, 1);
+        }
+
+        a:link {
+            text-decoration: none;
+        }
+
+        a:visited {
+            text-decoration: none;
+        }
+
+        a:hover {
+            text-decoration: none;
+        }
+
+        legend {
+            font-style: italic;
+        }
+
+        .form-style-3 {
+            max-width: 450px;
+            font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif;
+            margin: 40px auto;
+        }
+
+        .form-style-3 label {
+            display: contents;
+            margin-bottom: 10px;
+        }
+
+        input[type=text],
+        select {
+            width: 100%;
+            padding: 7px 20px;
+            margin: 8px 0;
+            display: inline-block;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+
+        input[type=number],
+        select {
+            width: 100%;
+            padding: 7px 20px;
+            margin: 8px 0;
+            display: inline-block;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+
+        input[type=date],
+        select {
+            width: 100%;
+            padding: 7px 20px;
+            margin: 8px 0;
+            display: inline-block;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+
+        input {
+            color: rgb(0, 0, 0);
+            font-size: 14px;
+            float: left;
+            padding-left: 10px;
+            padding-right: 10px;
+            padding-top: 2px;
+            padding-bottom: 2px;
+            border: 1px solid rgb(77, 77, 77);
+            border-radius: 9px;
+            background: rgb(218, 213, 213);
+        }
+
+
+        a:link {
+            text-decoration: none;
+        }
+
+        a:visited {
+            text-decoration: none;
+        }
+
+        a:hover {
+            text-decoration: none;
+        }
+    </style>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+
+</head>
+
+<body>
+    <div class="w3-container">
+        <div class="form-style-3">
+            <form action="" method="post">
+                <legend>FIture ADD</legend>
+                <input type="checkbox"> ID : <input type="number" size="30" id="ID" name="ID" placeholder="masukkan ID">
+                <br>
+                <input type="checkbox"> String : <input type="text" size="30" id="String" name="String"
+                    placeholder="masukkan String">
+                <br>
+                <input type="checkbox"> Integer : <input type="number" size="30" id="Integers" name="Integers"
+                    placeholder="masukkan Integer">
+                <br>
+                <input type="checkbox"> Float : <input type="number" step="any" size="30" id="Floats" name="Floats"
+                    placeholder="masukkan Float">
+                <br>
+                <input type="checkbox"> Date : <input type="date" size="30" id="Dates" name="Dates">
+                <br>
+                To
+                <br>
+                <input type="date" size="30" id="Dates" name="Dates">
+                <br>
+                <label for="Boolean"> <input type="checkbox"> Boolean : </label>
+                <select id="Booleans" name="Booleans">
+                    <option value="Lainnya">Lainnya</option>
+                    <option value="true">True</option>
+                    <option value="false">False</option>
+                </select>
+                <br>
+                <br>
+                <input type="submit" class="submit" value="SEARCH" cols="30">
+            </form>
+        </div>
+        <br>
+        <br>
+        <br>
+
+        <table id="customers">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>String</th>
+                    <th>Integer</th>
+                    <th>Float</th>
+                    <th>Date</th>
+                    <th>Boolean</th>
+                    <th>Update</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% rows.forEach((item)=> { %>
+                    <tr>
+                        <td>
+                            <%= item.ID %>
+                        </td>
+                        <td>
+                            <%= item.String %>
+                        </td>
+                        <td>
+                            <%= item.Integers %>
+                        </td>
+                        <td>
+                            <%= item.Floats %>
+                        </td>
+                        <td>
+                            <%= item.Dates %>
+                        </td>
+                        <td>
+                            <%= item.Booleans %>
+                        </td>
+                        <td>
+                            <a class="a" href="/edit/<%= item.ID %>">Edit</a>
+                            <a class="button" href="/delete/<%= item.ID %>">Delete</a>
+                        </td>
+                    </tr>
+                    <% }) %>
+
+            </tbody>
+        </table>
+        <div class="w3-bar">
+            <% for(let i=1 ; i <=pages; i++) { %>
+                <a href="<%= url.replace(`page = ${page}`, `page=${i}`)%> /?pages = <%= i %>" class="w3-button">
+                    <%= i %>
+                </a>
+                <% } %>
+        </div>
+        <br>
+        <a class="atas" href="/add">+</a>
+
+</body>
+
+</html>

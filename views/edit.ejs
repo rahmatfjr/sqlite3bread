@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Fiture Add</title>
+    <style>
+        legend {
+            font-style: italic;
+        }
+
+        .form-style-3 {
+            max-width: 450px;
+            font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif;
+        }
+
+        .form-style-3 label {
+            display: contents;
+            margin-bottom: 10px;
+        }
+
+        input[type=text],
+        select {
+            width: 100%;
+            padding: 12px 20px;
+            margin: 8px 0;
+            display: inline-block;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+
+        input[type=number],
+        select {
+            width: 100%;
+            padding: 12px 20px;
+            margin: 8px 0;
+            display: inline-block;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+
+        input[type=date],
+        select {
+            width: 100%;
+            padding: 12px 20px;
+            margin: 8px 0;
+            display: inline-block;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+
+        a {
+            color: rgb(0, 0, 0);
+            font-size: 14px;
+            float: right;
+            padding-left: 10px;
+            padding-right: 10px;
+            padding-top: 2px;
+            padding-bottom: 2px;
+            border: 1px solid rgb(77, 77, 77);
+            border-radius: 9px;
+            background: rgb(218, 213, 213);
+        }
+
+        input {
+            color: rgb(0, 0, 0);
+            font-size: 14px;
+            float: left;
+            padding-left: 10px;
+            padding-right: 10px;
+            border: 1px solid rgb(77, 77, 77);
+            border-radius: 9px;
+            background: rgb(218, 213, 213);
+        }
+
+        a:link {
+            text-decoration: none;
+        }
+
+        a:visited {
+            text-decoration: none;
+        }
+
+        a:hover {
+            text-decoration: none;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="form-style-3">
+        <% rows.forEach((item) => { %>
+        <form action="" method="post">
+            <fieldset>
+                <legend>FIture EDIT</legend>
+                <input type="hidden" id="ID" name="ID" value="<%= item.ID %>">
+                String : <input type="text" size="30" id="String" name="String" value="<%= item.String %>"
+                    placeholder="masukkan String">
+                <br>
+                Integer : <input type="number" size="30" id="Integers" name="Integers" value="<%= item.Integers %>"
+                    placeholder="masukkan Integer">
+                <br>
+                Float : <input type="number" step="any" size="30" id="Floats" name="Floats" value="<%= item.Floats %>"
+                    placeholder="masukkan Float">
+                <br>
+                Date : <input type="date" size="30" id="Dates" name="Dates" value="<%= item.Dates %>">
+                <br>
+                <label for="Boolean">Boolean :</label>
+                <select id="Booleans" name="Booleans" value="<%= item.Booleans %>">
+                    <option value="Lainnya">Lainnya</option>
+                    <option value="true">True</option>
+                    <option value="false">False</option>
+                </select>
+                <br>
+                <br>
+                <input type="submit" class="submit" value="SAVE" cols="30">
+                <a href="/">↰ Back</a>
+            </fieldset>
+        </form>
+        <% }) %>
+    </div>
+</body>
+
+</html>
