@@ -1,8 +1,10 @@
+require('dotenv').config()
 
 const sqlite3 = require('sqlite3').verbose()
 const express = require('express');
 const path = require('path')
 const bodyParser = require('body-parser');
+
 
 
 
@@ -26,22 +28,76 @@ app.use(bodyParser.json())
 
 app.get('/', (req, res) => {
 
-    const url = req.url == '/' ? '/? pages = 1' : req.url
+    // const {StringC} = req.query
+
+    const url = req.url == '/' ? '/?page=1' : req.url
     console.log(url)
 
     const page = req.query.page || 1
-    const limit = 3
+    const limit = 2
     const offset = (page - 1) * limit
-    const params = []
-    
+    const wheres = []
+    const value = []
 
-    db.all('SELECT COUNT(*) AS total FROM challange', (err, data) => {
+
+    if (req.query.ID && req.query.ids == 'on') {
+        wheres.push(`ID = ?`)
+        value.push(req.query.ID)
+    }
+
+    if (req.query.String  && req.query.strng == 'on') {
+        wheres.push(`String like '%' || ? || '%'`)
+        value.push(req.query.String)
+    }
+
+    if (req.query.Integers && req.query.int == 'on') {
+        wheres.push(`Integers = ?`)
+        value.push(req.query.Integers)
+    }
+
+    if (req.query.Floats && req.query.flo == 'on') {
+        wheres.push(`Floats = ?`)
+        value.push(req.query.Floats)
+    }
+
+    if (req.query.dt == 'on') {
+        if (req.query.Start_Dates && req.query.End_Dates) {
+            wheres.push(`Dates between ? and ?`)
+            value.push(req.query.Start_Dates)
+            value.push(req.query.End_Dates)
+        }
+    }
+    if (req.query.Booleans  && req.query.blo == 'on') {
+        wheres.push(`Booleans = ?`)
+        value.push(req.query.Booleans)
+        console.log(req.query.Booleans)
+    }
+
+
+
+    let sql = 'SELECT COUNT(*) AS total FROM challange'
+    if (wheres.length > 0) {
+        sql += ` WHERE ${wheres.join(' and ')}`
+    }
+    console.log('ssql count ', sql)
+
+    db.all(sql, value, (err, data) => {
         const pages = Math.ceil(data[0].total / limit)
-        db.all('SELECT * FROM challange LIMIT ? OFFSET ?', [limit, offset], (err, data) => {
+
+        sql = 'SELECT * FROM challange'
+        if (wheres.length > 0) {
+            sql += ` WHERE ${wheres.join(' and ')}`
+        }
+
+        sql += ' LIMIT ? OFFSET ?'
+
+        console.log('sql get', sql)
+
+        db.all(sql, [...value, limit, offset], (err, data) => {
             if (err) {
                 return console.log('ini error', err)
             }
-            res.render('list', { rows: data, pages, page })
+            res.render('list', { rows: data, pages, page, url, req })
 
         })
     })
@@ -89,14 +145,14 @@ app.get('/delete/:id', (req, res) => {
     })
 })
 
-app.get('/search', (req, res) => {
-    db.all('SELECT * FROM challange(ID = ?, String = ?, Iintegers = ?, Floats = ?, Dates = ?, Booleans = ?)', [req.body.ID, req.body.String, req.body.Integers, req.body.Floats, req.body.Dates, req.body.Booleans], (err) => {
-        if (err) {
-            console.log('ini error', err)
-        }
-        res.riderect('/')
-    })
-})
+// app.get('/search', (req, res) => {
+//     db.all('SELECT * FROM challange(ID = ?, String = ?, Iintegers = ?, Floats = ?, Dates = ?, Booleans = ?)', [req.body.ID, req.body.String, req.body.Integers, req.body.Floats, req.body.Dates, req.body.Booleans], (err) => {
+//         if (err) {
+//             console.log('ini error', err)
+//         }
+//         res.riderect('/')
+//     })
+// })
 
 app.listen(port, () => {
     console.log(`example listening on ${port}`)
